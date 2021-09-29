@@ -17,14 +17,16 @@ tested) from the drop-down menu below.
 It should be possible to launch Counter-Strike: Global Offensive (App ID 730)
 from the terminal (this might take some time, especially the first start after
 updating or setting the compatibility):
-
-        steam -applaunch 730 -insecure -untrusted -novid -nojoy
+```
+steam -applaunch 730 -insecure -untrusted -novid -nojoy
+```
 
 The gym environment executes the game on a virtual X server display, either
 inside a window on the pre-existing X display (`Xephyr`) or invisible in the
 background (`Xvfb`). To install the required packages on **Ubuntu**:
-
-        sudo apt install xvfb xserver-xephyr
+```
+sudo apt install xvfb xserver-xephyr
+```
 
 # Installation
 > Note: This package is still in early stages of development and there are no
@@ -32,16 +34,19 @@ background (`Xvfb`). To install the required packages on **Ubuntu**:
 
 First install or upgrade python packages necessary to build and install the
 library. It is recommended to install into a local python environment (`venv`):
-
-        python3 -m venv .env
-        source .env/bin/activate
-        pip install --upgrade pip setuptools wheel
+```
+python3 -m venv .env
+source .env/bin/activate
+pip install --upgrade pip setuptools wheel
+```
 
 Now clone the git repository into the empty directory `gym-csgo` and install the
 package in editable mode via pip:
 
-        https://github.com/iksnagreb/gym-csgo
-        pip install -e gym-csgo
+```
+https://github.com/iksnagreb/gym-csgo
+pip install -e gym-csgo
+```
 
 # Basic Usage
 Running a **Deathmatch** (game mode) environment with default configuration and
