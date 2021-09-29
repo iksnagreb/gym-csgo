@@ -25,3 +25,43 @@ inside a window on the pre-existing X display (`Xephyr`) or invisible in the
 background (`Xvfb`). To install the required packages on **Ubuntu**:
 
         sudo apt install xvfb xserver-xephyr
+
+# Installation
+> Note: This package is still in early stages of development and there are no
+> other options to install besides cloning the repository for now.
+
+First install or upgrade python packages necessary to build and install the
+library. It is recommended to install into a local python environment (`venv`):
+
+        python3 -m venv .env
+        source .env/bin/activate
+        pip install --upgrade pip setuptools wheel
+
+Now clone the git repository into the empty directory `gym-csgo` and install the
+package in editable mode via pip:
+
+        https://github.com/iksnagreb/gym-csgo
+        pip install -e gym-csgo
+
+# Basic Usage
+Running a **Deathmatch** (game mode) environment with default configuration and
+random actions per step until it is done (the match is done after 10 minutes):
+```python
+# gym_csgo registers the envs (to gym.make(...))
+import gym_csgo
+# Gym environments
+import gym
+
+# Open new environment context (automatically closes env at end of scope)
+with gym.make('csgo_dm-v0') as env:
+    # Reset the environment
+    env.reset()
+    # Env is not done yet
+    done = False
+    # Until the environment is done
+    while not done:
+        # Get random action from environment
+        action = env.action_space.sample()
+        # Execute the random action and collect observation
+        obs, rew, done, info = env.step(action)
+```
