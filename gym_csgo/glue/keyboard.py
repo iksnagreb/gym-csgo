@@ -1,6 +1,7 @@
 # Pynput library to interact with the keyboard
 from pynput import keyboard
 
+
 # Sets keyboard key state
 def set_key( controller, key, state ):
     # If state is True (Pressed)
@@ -10,6 +11,7 @@ def set_key( controller, key, state ):
     else:
         # Otherwise release the key
         controller.release(key)
+
 
 # Sets Counter Strike: Global Offensive keyboard key state
 def control_keyboard( controller, state ):
@@ -35,9 +37,12 @@ def control_keyboard( controller, state ):
     set_key(controller, 'E', state['use'])
     # Set switch state
     set_key(controller, 'Q', state['switch'])
+    # Set healthshot state
+    set_key(controller, 'X', state['healthshot'])
     # Set equip state
     for key in range(10):
         set_key(controller, str(key), state['equip'] == key)
+
 
 # Resets Counter Strike: Global Offensive keyboard key state
 def reset_keyboard( controller ):
@@ -63,6 +68,8 @@ def reset_keyboard( controller ):
     set_key(controller, 'E', False)
     # Set switch state
     set_key(controller, 'Q', False)
+    # Set healthshot state
+    set_key(controller, 'X', False)
     # Set equip state
     for key in range(10):
         set_key(controller, str(key), False)

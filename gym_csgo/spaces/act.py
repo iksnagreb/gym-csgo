@@ -19,6 +19,7 @@ def make_act_space():
         'drop': gym.spaces.Discrete(2),
         'use': gym.spaces.Discrete(2),
         'switch': gym.spaces.Discrete(2),
+        'healthshot': gym.spaces.Discrete(2),
         'equip': gym.spaces.Discrete(10),
         'camera': gym.spaces.Box(low=-540.0, high=540.0, shape=(2,))
     })
@@ -35,7 +36,7 @@ def make_noop():
         # No interacting
         'fire': 0, 'special': 0, 'reload': 0, 'drop': 0, 'use': 0,
         # No weapon change
-        'switch': 0, 'equip': None,
+        'switch': 0, 'healthshot': 0, 'equip': None,
         # Do not look around
         'camera': [0, 0]
     }

@@ -23,7 +23,8 @@ def map_keys_to_action(keys, action: dict):
         'reload': pygame.K_r,
         'drop': pygame.K_g,
         'use': pygame.K_e,
-        'switch': pygame.K_q
+        'switch': pygame.K_q,
+        'healthshot': pygame.K_x
     }
     # Iterate all actions and test whether the mapped key is set
     for key in mappings:
