@@ -83,3 +83,25 @@ with gym.make('csgo_dm-v0') as env:
         # Execute the random action and collect observation
         obs, rew, done, info = env.step(action)
 ```
+
+# Demo Actors
+Programs showing demo actors in the environment are provided in the
+`gym_csgo.demo` subpackage. There are `random` and `noop` actors which sample
+random actions from the environment's action space or do no action at all: These
+might be useful for testing the environment in general (esp. functionality,
+startup, graphics, etc.) or experiment with configuration options which can
+passed to the game. Start a random actor playing a deathmatch and show the
+frames per second to evaluate the performance:
+```
+python -m gym_csgo.demo.random csgo_dm-v0 +cl_showfps 1
+```
+
+A special case is the `manual` actor which allows to actually play the game
+through a pygame display interacting with the gym environment which itself wraps
+the game on the virtual display. This is merely a technical demonstration but
+might as well be suited as a starting point for collecting human demonstration
+data. Play a game of casual game mode on the map train (the pygame actor will be
+available once the match starts after the warmup period):
+```
+python -m gym_csgo.demo.manual csgo_casual-v0 de_train
+```
