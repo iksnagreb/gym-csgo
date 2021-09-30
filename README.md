@@ -21,6 +21,19 @@ updating or setting the compatibility):
 steam -applaunch 730 -insecure -untrusted -novid -nojoy
 ```
 
+## Game State Integration
+Counter-Strike: Global Offensive Game State Integration is necessary to
+communicate information about the current game state to the python interface.
+This needs to be set up in the game configurations: Copy the game state
+integration [configuration file](cfg/gamestate_integration_gym_csgo.cfg) from
+the `cfg` directory of the repository into the `cfg` directory of the
+Counter-Strike: Global Offensive installation.
+
+To find out more about the Counter-Strike: Global Offensive Game State
+Integration and its configuration look at the [Valve Developer
+Community](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration).
+
+## Virtual Display
 The gym environment executes the game on a virtual X server display, either
 inside a window on the pre-existing X display (`Xephyr`) or invisible in the
 background (`Xvfb`). To install the required packages on **Ubuntu**:
