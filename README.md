@@ -1,6 +1,10 @@
 # gym-csgo
 Counter-Strike: Global Offensive environment for OpenAI Gym on Linux
 
+:bangbang: **Never use this connecting to official/online game servers! Never cheat! It _might_ get you banned.**
+
+:bangbang: **Consider creating a separate throwaway steam account for experimenting with this environment.**
+
 # Prerequisites
 To use the gym environment, steam for Linux with Counter-Strike: Global
 Offensive installed needs to be available.
