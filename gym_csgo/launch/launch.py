@@ -1,6 +1,9 @@
-# Launch subprocesses
+# Launch a subprocess
 import subprocess
-
+# Import os functions
+import os
+# Signal number (SIGTERM)
+import signal
 
 # Wraps csgo process group (session)
 class CSGOSessionWrapper():
@@ -10,22 +13,16 @@ class CSGOSessionWrapper():
 
     # Terminates process group
     def terminate(self):
-        # Import os functions and signal number
-        import os, signal
         # Kill process group of popen object with SIGTERM
         os.killpg(os.getpgid(self.popen.pid), signal.SIGTERM)
 
     # Kills process group
     def kill(self):
-        # Import os functions and signal number
-        import os, signal
-        # Kill process group of popen object with SIGKILL
+        # Kill process group of Popen object with SIGKILL
         os.killpg(os.getpgid(self.popen.pid), signal.SIGKILL)
 
     # Gets the id of the process group
     def getpgid(self):
-        # Import os functions and signal number
-        import os
         # Get group id of child process
         return os.getpgid(self.popen.pid)
 
@@ -36,7 +33,7 @@ def launch_csgo(args=None):
     if args is None:
         args = []
     # Launch Counter Strike process via steam
-    p = subprocess.Popen(['steam', '-applaunch', '730', *args],
-                         start_new_session=True)
+    process = subprocess.Popen(['steam', '-applaunch', '730', *args],
+        start_new_session=True)
     # Return subprocess (e.g. to terminate later) wrapper
-    return CSGOSessionWrapper(p)
+    return CSGOSessionWrapper(process)

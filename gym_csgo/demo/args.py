@@ -1,6 +1,7 @@
 # Command line argument parser
 import argparse
 
+
 # Constructs argument parser parsing all arguments required for CSGOEnv
 def make_argparse():
     # Setup command line argument parser

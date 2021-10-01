@@ -2,10 +2,10 @@
 import gym
 # Numpy arrays
 import numpy as np
-# Enumeration observation space
-from .enum import Enum
 # Game weapon specifications
 from gym_csgo.specs.weapon import WEAPON_NAMES, WEAPON_TYPES, NUM_WEAPON_SLOTS
+# Enumeration observation space
+from .enum import Enum
 
 
 # Constructs a Counter Strike weapon observation space
@@ -16,7 +16,7 @@ def make_weapon_obs_space():
     return gym.spaces.Dict({
         # Name of the weapon
         'name': Enum(*WEAPON_NAMES, 'none'),
-        # Type of the waepon
+        # Type of the weapon
         'type': Enum(*WEAPON_TYPES, 'none'),
         # State of weapon
         'state': Enum('active', 'holstered', 'none'),

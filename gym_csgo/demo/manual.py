@@ -1,9 +1,9 @@
-# Gym environments, csgo to register envs
-import gym, gym_csgo
 # Interactive game window
 import pygame
 # Image processing
 import cv2
+# Gym environments, csgo to register envs
+import gym, gym_csgo
 # Command line argument parsing
 from .args import make_argparse
 

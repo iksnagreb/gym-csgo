@@ -1,9 +1,9 @@
-# OpenAI gym environments
-import gym
-# Show image using opencv
-import cv2
 # Sleeping
 from time import sleep
+# OpenAI gym environments
+import gym
+# Show image using OpenCV
+import cv2
 # Virtual display server
 from gym_csgo.glue.display import VirtualDisplay
 # Mouse controller (decodes action dict)

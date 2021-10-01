@@ -3,6 +3,7 @@ import gym
 # Numpy arrays
 import numpy as np
 
+
 # Enum (from string) observation/action space
 class Enum(gym.spaces.Discrete):
     # Constructs an Enum space from selection of values
@@ -18,9 +19,9 @@ class Enum(gym.spaces.Discrete):
         return self.values[super().sample()]
 
     # Checks whether Enum space contains a value
-    def contains(self, item):
+    def contains(self, x):
         # Test whether item in enum values (list)
-        return item in self.values
+        return x in self.values
 
     # Produces string representation of the enum space
     def __repr__(self):
