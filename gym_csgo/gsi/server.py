@@ -1,41 +1,63 @@
+"""
+Counter-Strike: Global Offensive Game State Integration Server
+"""
+
+# Run server in separate thread
+import threading
 # HTTP server (endpoint for game state integration POST requests)
 from flask import Flask, request
-# Multithreading (run server in separate thread)
-import threading
-# Game state integration root gmae state descriptor
+# Game state integration root game state descriptor
 from .gamestate import GameState
+
 
 # Counter Strike: Global Offensive Game State Integration Server
 #   HTTP POST endpoint
-class GSIServer( object ):
+class GSIServer:
+    """
+    HTTP POST request endpoint server for Counter-Strike: Global Offensive Game
+    State Integration requests run in a separate thread.
+    """
+
     # Configures game state integration service
-    def __init__( self, path, port ):
+    def __init__(self, path, port):
+        """
+        Initializes the HTTP server, current game state and thread lock for
+        accessing the game state
+        """
         # Current game state
         self.state = None
-        # Thread lock to synchronize access to the gamestate
+        # Thread lock to synchronize access to the game state
         self.lock = threading.Lock()
+
         # Server thread
-        def server(  ):
+        def server():
             # Setup flask http service
-            server = Flask(__name__)
+            _server = Flask(__name__)
+
             # Handle HTTP POST request
-            @server.route(path, methods=['POST'])
-            def post(  ):
-                # Lock access to the gamestate
-                self.lock.acquire()
-                # Interpret request as json and write to wrapping object
-                self.state = request.get_json()
-                # Release access to the gamestate
-                self.lock.release()
+            @_server.route(path, methods=['POST'])
+            def post():
+                # Lock access to the game state
+                with self.lock:
+                    # Interpret request as json and write to wrapping object
+                    self.state = request.get_json()
                 # Send response
                 return 'OK'
+
             # Run the flask app
-            server.run(port=port)
+            _server.run(port=port)
+
         # Create and start server thread
         threading.Thread(target=server, daemon=True).start()
 
     # Gets next game state integration if available
-    def grab( self, reset=False, block=False ):
+    def grab(self, reset=False, block=False):
+        """
+        Grabs the current game state.
+        :param reset: Reset the state to None after the access
+        :param block: Block while there is None game state
+        :return: Returns the current game state as a GameState object
+        """
         # Wait for new current state
         while block and not self.state:
             pass
@@ -45,14 +67,19 @@ class GSIServer( object ):
         if reset and self.lock.acquire(blocking=False):
             # Set state back to None (empty)
             self.state = None
-            # Release access to the gamestate
+            # Release access to the game state
             self.lock.release()
         # Return the current state
         return GameState(state)
 
     # Streams game state integration
-    def stream( self, **kwargs ):
-        # Grab gamestates for ever
+    def stream(self, **kwargs):
+        """
+        Streams (yields) game states for ever
+        :param kwargs: Keyword arguments passed to the grab method
+        :return: Yields the next game state as a GameState object
+        """
+        # Grab game states for ever
         while True:
-            # Next gamestate
+            # Next game state
             yield self.grab(**kwargs)

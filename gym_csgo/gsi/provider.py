@@ -7,7 +7,7 @@ class Provider(dict):
 
     # Provider appid
     @property
-    def appdid(self):
+    def appid(self):
         return self.get('appid')
 
     # Provider version

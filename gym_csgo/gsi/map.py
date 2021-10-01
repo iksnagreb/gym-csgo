@@ -3,7 +3,7 @@
 
 # Game state integration map descriptor
 class Map(dict):
-    # Map team discriptor
+    # Map team descriptor
     class Team(dict):
         # The team's current score.
         @property
@@ -28,9 +28,9 @@ class Map(dict):
 
     # Map round_wins descriptor
     class RoundWins(dict):
-        # Itertates all rounds
+        # Iterates all rounds
         def __iter__(self):
-            return ((round, win) for (round, win) in self.items())
+            return ((_round, win) for (_round, win) in self.items())
 
         # Get round winning condition for round
         def round(self, index):

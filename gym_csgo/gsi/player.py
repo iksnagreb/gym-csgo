@@ -52,7 +52,7 @@ class Player(dict):
         def round_kills(self):
             return self.get('round_kills')
 
-        # Amount of kills from a headshot for the spectated player in the
+        # Amount of kills from a head shot for the spectated player in the
         # current round. Value 0-5.
         @property
         def round_killhs(self):
@@ -142,9 +142,9 @@ class Player(dict):
             weapon = self.get(f'weapon_{index}')
             # If weapon at the slot exists
             if weapon is not None:
-                # Wrapp in Weapon object
+                # Wrap in Weapon object
                 return Player.Weapons.Weapon(weapon)
-            # No weapon at the slot 
+            # No weapon at the slot
             return None
 
         # The players active weapon
@@ -155,7 +155,7 @@ class Player(dict):
                 # Test weapon state (only one should be active)
                 if value['state'] == 'active':
                     # Return the active weapon
-                    return (key, Player.Weapons.Weapon(value))
+                    return key, Player.Weapons.Weapon(value)
             # No weapon is active
             return None
 
@@ -182,7 +182,7 @@ class Player(dict):
     def steamid(self):
         return self.get('steamid')
 
-    # Player observer slot when spectatting player
+    # Player observer slot when spectating player
     @property
     def observer_slot(self):
         return self.get('observer_slot')

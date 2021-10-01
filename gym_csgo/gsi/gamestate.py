@@ -11,6 +11,7 @@ from .phase_countdowns import PhaseCountdowns
 # Map game state descriptor
 from .map import Map
 
+
 # Global game state root structure
 class GameState(dict):
     # Initializes game state dict from data handling None
@@ -62,11 +63,11 @@ class GameState(dict):
     @property
     def round(self):
         # Query round data (might not exist)
-        round = self.get('round')
+        _round = self.get('round')
         # If round field exists
-        if round is not None:
+        if _round is not None:
             # Wrap in round object
-            return Round(round)
+            return Round(_round)
         # No round
         return None
 
@@ -86,11 +87,11 @@ class GameState(dict):
     @property
     def map(self):
         # Query map data (might not exist)
-        map = self.get('map')
+        _map = self.get('map')
         # If map field exists
-        if map is not None:
+        if _map is not None:
             # Wrap in map object
-            return Map(map)
+            return Map(_map)
         # No map
         return None
 
