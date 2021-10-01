@@ -213,7 +213,7 @@ class CSGOEnv(gym.core.Env):
 # Counter Strike: Global Offensive casual game mode environment class
 class CSGOCasualEnv(CSGOEnv):
     # Constructs a casual game mode environment
-    def __init__(self, mapname='de_dust', args=None, **kwargs):
+    def __init__(self, mapname='de_dust2', args=None, **kwargs):
         # If no further args supplied, use empty list
         if args is None:
             args = []
@@ -226,7 +226,7 @@ class CSGOCasualEnv(CSGOEnv):
 # Counter Strike: Global Offensive deathmatch game mode environment class
 class CSGODeathmatchEnv(CSGOEnv):
     # Constructs a deathmatch game mode environment
-    def __init__(self, mapname='de_dust', args=None, **kwargs):
+    def __init__(self, mapname='de_dust2', args=None, **kwargs):
         # If no further args supplied, use empty list
         if args is None:
             args = []

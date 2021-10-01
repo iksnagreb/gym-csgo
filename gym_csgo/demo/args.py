@@ -10,7 +10,7 @@ def make_argparse():
         'env_id', type=str, choices=('csgo_dm-v0', 'csgo_casual-v0')
     )
     parser.add_argument(
-        'mapname', type=str, nargs='?', default='de_dust'
+        'mapname', type=str, nargs='?', default='de_dust2'
     )
     parser.add_argument(
         'args', type=str, nargs='*'

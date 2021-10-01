@@ -97,7 +97,7 @@ startup, graphics, etc.) or experiment with configuration options which can
 passed to the game. Start a random actor playing a deathmatch and show the
 frames per second to evaluate the performance:
 ```
-python -m gym_csgo.demo.random csgo_dm-v0 +cl_showfps 1
+python -m gym_csgo.demo.random csgo_dm-v0 de_dust +cl_showfps 1
 ```
 
 A special case is the `manual` actor which allows to actually play the game
