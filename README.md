@@ -15,8 +15,11 @@ it is necessary to run the game in compatibility mode,  to get reasonable
 performance (frames per second) in the gym environment: Using the steam client,
 in the **Properties** of Counter-Strike: Global Offensive navigate to
 **Compatibility** and check **Force the use of a specific Steam Play
-compatibility tool** and select **Proton 6.3-6** (others might work but are not
+compatibility tool** and select **Proton 5.13-6** (others might work but are not
 tested) from the drop-down menu below.
+> As of 1 October 2021 **Proton 6.3-6** is longer available in the steam
+> client. Using **6.3-7** the game keeps crashing just after startup, thus
+> **5.13-6** seems to be the best option for now.
 
 It should be possible to launch Counter-Strike: Global Offensive (App ID 730)
 from the terminal (this might take some time, especially the first start after
