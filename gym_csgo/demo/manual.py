@@ -60,7 +60,7 @@ def map_mouse_to_action(mouse, action, scale=50, limit=480):
 
 
 # Main function entry point (do not want to have stuff in global scope)
-def main(env_id, mapname, step_rate=100, **kwargs):
+def main(env_id, mapname, **kwargs):
     # Initialize pygame environment
     pygame.init()
     # Setup pygame display for input and output of the environment
@@ -91,7 +91,7 @@ def main(env_id, mapname, step_rate=100, **kwargs):
             # Use mouse input to update actions
             action = map_mouse_to_action(pygame.mouse, action)
             # Execute the prepared action and collect observation
-            obs, rew, done, _ = env.step(action, wait=1.0/step_rate)
+            obs, rew, done, _ = env.step(action)
             # Clear the display
             display.fill((255, 255, 255))
             # Convert pov observation to use with pygame
@@ -108,14 +108,12 @@ def main(env_id, mapname, step_rate=100, **kwargs):
 if __name__ == '__main__':
     # Construct environment argument parser
     parser = make_argparse()
-    # Add step rate (~ frame rate)
-    parser.add_argument('--step-rate', default=100)
     # Parse supplied arguments using the parser
     args = parser.parse_args()
     # Call main function and forward the arguments
     main(
         # Environment / Map / Game Setup
-        args.env_id, args.mapname, args=args.args, step_rate=args.step_rate,
+        args.env_id, args.mapname, args=args.args,
         # Display Setup
         width=args.width, height=args.height, display=args.display,
         display_method=args.display_method,

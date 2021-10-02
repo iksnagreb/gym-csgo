@@ -5,7 +5,7 @@ from .args import make_argparse
 
 
 # Main function entry point (do not want to have stuff in global scope)
-def main(env_id, mapname, step_rate=100, **kwargs):
+def main(env_id, mapname, **kwargs):
     # Open new environment context (automatically closes env at end of scope)
     with gym.make(env_id, mapname=mapname, **kwargs) as env:
         # Reset the environment
@@ -17,7 +17,7 @@ def main(env_id, mapname, step_rate=100, **kwargs):
             # Get random action from environment
             action = env.action_space.noop()
             # Execute the random action and collect observation
-            obs, rew, done, info = env.step(action, wait=1.0/step_rate)
+            obs, rew, done, info = env.step(action)
             # Show current observation (image)
             env.render()
 
@@ -26,14 +26,12 @@ def main(env_id, mapname, step_rate=100, **kwargs):
 if __name__ == '__main__':
     # Construct environment argument parser
     parser = make_argparse()
-    # Add step rate (~ frame rate)
-    parser.add_argument('--step-rate', default=100)
     # Parse supplied arguments using the parser
     args = parser.parse_args()
     # Call main function and forward the arguments
     main(
         # Environment / Map / Game Setup
-        args.env_id, args.mapname, args=args.args, step_rate=args.step_rate,
+        args.env_id, args.mapname, args=args.args,
         # Display Setup
         width=args.width, height=args.height, display=args.display,
         display_method=args.display_method,
