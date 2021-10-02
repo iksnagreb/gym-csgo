@@ -1,5 +1,7 @@
 # Environment variable
 from os import environ
+# Caching the display properties for increased performance
+from functools import cached_property
 # Starting a subprocess
 from subprocess import Popen
 # Context (with statement)
@@ -47,7 +49,7 @@ class VirtualDisplay:
         self.x = None
 
     # Gets pynput mouse controller for controlling the virtual display
-    @property
+    @cached_property
     def mouse(self):
         # Remember currently active display
         DISPLAY = environ['DISPLAY']
@@ -62,7 +64,7 @@ class VirtualDisplay:
         return controller
 
     # Gets pynput keyboard controller for controlling the virtual display
-    @property
+    @cached_property
     def keyboard(self):
         # Remember currently active display
         DISPLAY = environ['DISPLAY']
@@ -77,7 +79,7 @@ class VirtualDisplay:
         return controller
 
     # Gets mss screen for capturing the virtual display
-    @property
+    @cached_property
     def screen(self):
         # Return mss screen capture object
         return mss.mss(display=self.display)
