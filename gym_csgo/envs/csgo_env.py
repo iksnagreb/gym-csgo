@@ -57,6 +57,8 @@ class CSGOEnv(gym.core.Env):
         self.last_obs = None
         # Current observation
         self.current_obs = None
+        # Current game state
+        self.current_state = None
 
     # Resets the environment
     def reset(self):
@@ -66,6 +68,12 @@ class CSGOEnv(gym.core.Env):
         # Reset input states
         reset_keyboard(self.display.keyboard)
         reset_mouse(self.display.mouse)
+        # Last observation
+        self.last_obs = None
+        # Current observation
+        self.current_obs = None
+        # Current game state
+        self.current_state = None
         # Activate the virtual display
         with self.display.activate():
             # Launch new csgo client session
@@ -78,7 +86,7 @@ class CSGOEnv(gym.core.Env):
         # Send action to environment
         self._set_act(action)
         # If specified to wait for some time
-        if wait:
+        if wait is not None:
             # Sleep for requested time
             sleep(wait)
         # Collect new state observation
@@ -99,10 +107,8 @@ class CSGOEnv(gym.core.Env):
 
     # Renders a view of the environment
     def render(self, mode='human'):
-        # Get environment observation
-        obs = self._get_obs()
-        # Show image
-        cv2.imshow(f'{self.__class__.__name__}', obs['pov'])
+        # Show image of current pov observation
+        cv2.imshow(f'{self.__class__.__name__}', self.current_obs['pov'])
         # Do not block
         cv2.waitKey(1)
 
@@ -110,11 +116,9 @@ class CSGOEnv(gym.core.Env):
     def _get_obs(self):
         # Wait for the environment to get ready
         while not self._is_ready() and not self._is_done():
-            continue
-        # Start with empty observation dict
-        obs = {}
-        # Capture screen
-        obs['pov'] = self.display.capture()
+            self.current_state = self.gsi.grab()
+        # Start with observation dict only containing image observation
+        obs = {'pov': self.display.capture()}
         # Get current game state
         state = self.gsi.grab()
         # Get player data
@@ -162,6 +166,8 @@ class CSGOEnv(gym.core.Env):
         self.last_obs = self.current_obs
         # Set new current observation
         self.current_obs = obs
+        # Set new current game state
+        self.current_state = state
         # Return collected observation
         return self.current_obs
 
@@ -180,10 +186,10 @@ class CSGOEnv(gym.core.Env):
         #   TODO: Probably not a good reward function
         return self.current_obs['score'] - self.last_obs['score']
 
-    # Gets info usefull for debugging
+    # Gets info useful for debugging
     def _get_info(self):
         # Get current game state
-        state = self.gsi.grab()
+        state = self.current_state
         # Get the id of the csgo session process group
         pgid = self.csgo_session.getpgid() if self.csgo_session else None
         # Get the display number
@@ -196,18 +202,19 @@ class CSGOEnv(gym.core.Env):
     # Tests whether the environment is ready for interactions
     def _is_ready(self):
         # Get current game state
-        state = self.gsi.grab()
+        state = self.current_state
         # For being ready, the map needs to have a phase and players activity
         # needs to be 'playing'
-        return state.map is not None and state.map.phase == 'live' \
-            and state.player.activity == 'playing'
+        return state is not None and state.map is not None \
+            and state.map.phase == 'live' and state.player.activity == 'playing'
 
     # Tests whether the environment is done
     def _is_done(self):
         # Get current game state
-        state = self.gsi.grab()
+        state = self.current_state
         # Environment is done, if map phase is 'gameover'
-        return state.map is not None and state.map.phase == 'gameover'
+        return state is not None and state.map is not None \
+            and state.map.phase == 'gameover'
 
 
 # Counter Strike: Global Offensive casual game mode environment class
