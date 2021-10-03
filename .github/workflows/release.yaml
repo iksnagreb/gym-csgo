@@ -1,0 +1,27 @@
+# Name of the whole workflow
+name: Release Python Package (Upload to PyPI)
+
+# Workflow triggers
+on:
+  release:
+    types: [created] # Run this workflow if a release is created
+
+# Jobs of this workflow
+jobs:
+  # Job deploying to PyPI
+  deploy:
+    # Run this job on ubuntu (this is latest LTS)
+    runs_on: ubuntu-20.04
+    # Steps to deploy the package
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install Dependencies
+        run: pip install --upgrade pip setuptools wheel build twine
+      - name: Build Package
+        run: python -m build
+      - name: Upload Package
+        env: # PyPI authentication
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: twine upload dist/*
