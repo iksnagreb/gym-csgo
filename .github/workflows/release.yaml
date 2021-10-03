@@ -11,7 +11,7 @@ jobs:
   # Job deploying to PyPI
   deploy:
     # Run this job on ubuntu (this is latest LTS)
-    runs_on: ubuntu-20.04
+    runs-on: ubuntu-20.04
     # Steps to deploy the package
     steps:
       - uses: actions/checkout@v2
