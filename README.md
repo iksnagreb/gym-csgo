@@ -49,23 +49,10 @@ sudo apt install xvfb xserver-xephyr
 ```
 
 # Installation
-> Note: This package is still in early stages of development and there are no
-> other options to install besides cloning the repository for now.
-
-First install or upgrade python packages necessary to build and install the
-library. It is recommended to install into a local python environment (`venv`):
+> Note: This package is still in early stages of development, installing might
+> miss dependencies or does not work at all.
 ```
-python3 -m venv .env
-source .env/bin/activate
-pip install --upgrade pip setuptools wheel
-```
-
-Now clone the git repository into the empty directory `gym-csgo` and install the
-package in editable mode via pip:
-
-```
-https://github.com/iksnagreb/gym-csgo
-pip install -e gym-csgo
+pip install --upgrade gym-csgo
 ```
 
 # Basic Usage
