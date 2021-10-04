@@ -1,3 +1,5 @@
+# Type or None
+from typing import Optional
 # Player game state integration
 from gym_csgo.gsi.player import Player
 
@@ -21,11 +23,22 @@ WEAPON_TYPES = [
 # Weapon slots to consider
 NUM_WEAPON_SLOTS = 10
 
+
 # Observes a weapon converts from GSI object to dict weapon observation
-def observe_weapon(weapon: Player.Weapons.Weapon) -> dict:
+def observe_weapon(weapon: Optional[Player.Weapons.Weapon]) -> dict:
     # No weapon supplied
     if weapon is None:
-        return {}
+        # Construct a "None-Weapon"
+        return {
+            # Discrete Enum values
+            'name': 'none',
+            'type': 'none',
+            'state': 'none',
+            # Continuous Box values
+            'ammo_clip': None,
+            'ammo_clip_max': None,
+            'ammo_reserve': None
+        }
 
     # Extracts value or return 'none' enum
     def value_or_none(value):
@@ -38,7 +51,7 @@ def observe_weapon(weapon: Player.Weapons.Weapon) -> dict:
         'type': value_or_none(weapon.type),
         'state': value_or_none(weapon.state),
         # Continuous Box values
-        'ammo_clip': value_or_none(weapon.ammo_clip),
-        'ammo_clip_max': value_or_none(weapon.ammo_clip_max),
-        'ammo_reserve': value_or_none(weapon.ammo_reserve)
+        'ammo_clip': weapon.ammo_clip,
+        'ammo_clip_max': weapon.ammo_clip_max,
+        'ammo_reserve': weapon.ammo_reserve
     }

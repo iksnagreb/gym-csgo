@@ -157,6 +157,9 @@ class CSGOEnv(gym.core.Env):
             # Currently equipped weapon
             if player.weapons.active is not None:
                 obs['weapon_active'] = observe_weapon(player.weapons.active[1])
+            # Add "None-Weapon" if none equipped
+            else:
+                obs['weapon_active'] = observe_weapon(None)
             # Extract weapon slots
             for index in range(NUM_WEAPON_SLOTS):
                 obs[f'weapon_{index}'] = observe_weapon(
