@@ -30,3 +30,14 @@ class Enum(gym.spaces.Discrete):
     # Compares to other space (Enum)
     def __eq__(self, other):
         return isinstance(other, Enum) and self.values == other.values
+
+
+# Flattens an Enum observation space
+@gym.spaces.flatten.register(Enum)
+def flatten_enum(space, x):
+    # Start with all zeros of length of observation space
+    onehot = np.zeros(space.n, dtype=space.dtype)
+    # Lookup index of x in Enum space values and set entry to 1
+    onehot[space.values.tolist().index(x)] = 1
+    # Return one hot encoded flat enum space
+    return onehot
