@@ -41,3 +41,9 @@ def flatten_enum(space, x):
     onehot[space.values.tolist().index(x)] = 1
     # Return one hot encoded flat enum space
     return onehot
+
+# Reverse the flatten_enum operation
+@gym.spaces.unflatten.register(Enum)
+def unflatten_enum(space, x):
+    # Lookup enum value at encoded position
+    return space.values[np.nonzero(x)[0][0]]
