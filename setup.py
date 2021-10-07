@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as file:
 # Setup the python package with dependencies
 setup(
     # Package name and version and contained packages
-    name='gym-csgo', version='0.0.2', packages=find_packages(),
+    name='gym-csgo', version='0.0.3', packages=find_packages(),
     # Package metadata
     description="Counter-Strike: Global Offensive environment for OpenAI Gym "
                 "on Linux",
