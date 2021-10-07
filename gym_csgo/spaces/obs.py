@@ -19,7 +19,7 @@ def make_weapon_obs_space():
         # Type of the weapon
         'type': Enum(*WEAPON_TYPES, 'none'),
         # State of weapon
-        'state': Enum('active', 'holstered', 'none'),
+        'state': Enum('active', 'holstered', 'reloading', 'none'),
         # Current amount of ammo in the clip
         'ammo_clip': Box(low=0, high=np.inf, shape=(1,)),
         # Maximum amount of ammo the clip for the weapon can hold

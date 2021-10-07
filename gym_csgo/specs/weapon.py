@@ -17,7 +17,8 @@ WEAPON_NAMES = ['weapon_' + name for name in [
 
 # List of known CSGO weapon types
 WEAPON_TYPES = [
-    'Pistol', 'Knife', 'Rifle', 'SniperRifle', 'Submachine Gun', 'C4', 'Grenade'
+    'Pistol', 'Knife', 'Rifle', 'SniperRifle', 'Submachine Gun', 'C4',
+    'Grenade', 'Shotgun', 'Machine Gun', 'StackableItem'
 ]
 
 # Weapon slots to consider
