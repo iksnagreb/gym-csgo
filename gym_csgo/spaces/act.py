@@ -27,8 +27,10 @@ def make_act_space():
 
 # Creates a noop (do nothing) action
 def make_noop():
-    # Return dictionary with all action set to 0 (False)
-    return {
+    # Sample template action (to have the appropriate ordered dict
+    template = make_act_space().sample()
+    # Update the template with all action set to 0 (False)
+    template.update({
         # Do not move
         'forward': 0, 'back': 0, 'left': 0, 'right': 0,
         # No sneaking, hiding, ...
@@ -39,4 +41,6 @@ def make_noop():
         'switch': 0, 'healthshot': 0, 'equip': None,
         # Do not look around
         'camera': [0, 0]
-    }
+    })
+    # Return updated dictionary
+    return template
