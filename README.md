@@ -21,6 +21,12 @@ tested) from the drop-down menu below.
 > client. Using **6.3-7** the game keeps crashing just after startup, thus
 > **5.13-6** seems to be the best option for now.
 
+> With the recent addition of [experimental Vulkan
+> support](https://blog.counter-strike.net/index.php/2022/01/36792/), it might
+> actually be possible to run the native Linux version of Counter-Strike with
+> sufficient performance. Please try this by adding `-vulkan` to your command
+> line.
+
 It should be possible to launch Counter-Strike: Global Offensive (App ID 730)
 from the terminal (this might take some time, especially the first start after
 updating or setting the compatibility):
