@@ -3,7 +3,7 @@ from pynput import keyboard
 
 
 # Sets keyboard key state
-def set_key( controller, key, state ):
+def set_key(controller, key, state):
     # If state is True (Pressed)
     if state:
         # Press the key
@@ -14,7 +14,7 @@ def set_key( controller, key, state ):
 
 
 # Sets Counter Strike: Global Offensive keyboard key state
-def control_keyboard( controller, state ):
+def control_keyboard(controller, state):
     # Set move forward state
     set_key(controller, 'W', state['forward'])
     # Set move left state
@@ -45,7 +45,7 @@ def control_keyboard( controller, state ):
 
 
 # Resets Counter Strike: Global Offensive keyboard key state
-def reset_keyboard( controller ):
+def reset_keyboard(controller):
     # Set move forward state
     set_key(controller, 'W', False)
     # Set move left state
