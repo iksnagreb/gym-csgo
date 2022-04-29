@@ -165,6 +165,13 @@ class CSGOEnv(gym.core.Env):
                 obs[f'weapon_{index}'] = observe_weapon(
                     player.weapons.slot(index)
                 )
+        # No weapons observed (observe all "None-Weapon")
+        else:
+            # The "None-Weapon" is equipped
+            obs['weapon_active'] = observe_weapon(None)
+            # Set all weapon slots to the "None-Weapon"
+            for index in range(NUM_WEAPON_SLOTS):
+                obs[f'weapon_{index}'] = observe_weapon(None)
         # Remember last observation
         self.last_obs = self.current_obs
         # Set new current observation
