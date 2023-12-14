@@ -35,7 +35,7 @@ class CSGOEnv(gym.core.Env):
         # Startup virtual display server
         self.display = VirtualDisplay(display_method, width=width,
             height=height, depth=24, display=display)
-        # Setup the game state integration
+        # Set up the game state integration
         self.gsi = GSIServer(path=gsi_path, port=gsi_port)
         # Setup csgo display arguments
         display_args = [
@@ -215,8 +215,9 @@ class CSGOEnv(gym.core.Env):
         state = self.current_state
         # For being ready, the map needs to have a phase and players activity
         # needs to be 'playing'
-        return state is not None and state.map is not None \
-            and state.map.phase == 'live' and state.player.activity == 'playing'
+        return (state is not None and state.map is not None
+            and state.map.phase == 'live' and state.player is not None and
+                state.player.activity == 'playing')
 
     # Tests whether the environment is done
     def _is_done(self):

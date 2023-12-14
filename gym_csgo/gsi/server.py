@@ -75,11 +75,11 @@ class GSIServer:
     # Streams game state integration
     def stream(self, **kwargs):
         """
-        Streams (yields) game states for ever
+        Streams (yields) game states forever
         :param kwargs: Keyword arguments passed to the grab method
         :return: Yields the next game state as a GameState object
         """
-        # Grab game states for ever
+        # Grab game states forever
         while True:
             # Next game state
             yield self.grab(**kwargs)
