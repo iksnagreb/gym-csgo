@@ -14,13 +14,13 @@ def set_button(controller, button, state):
 
 
 # Sets Counter Strike: Global Offensive mouse state
-def control_mouse(controller, state):
+def control_mouse(controller: mouse.Controller, state):
     # Set special state
     set_button(controller, mouse.Button.right, state['special'])
     # Set fire state
     set_button(controller, mouse.Button.left, state['fire'])
-    # Move the mouse pointer (moves the game camera)
-    controller.move(*state['camera'])
+    # Set the position of the mouse pointer (moves the game camera)
+    controller.position = state["camera"]
 
 
 # Resets Counter Strike: Global Offensive mouse state

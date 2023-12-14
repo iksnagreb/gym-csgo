@@ -45,7 +45,7 @@ def map_keys_to_action(keys, action: dict):
 
 
 # Maps mouse state to action
-def map_mouse_to_action(mouse, action, scale=50, limit=480):
+def map_mouse_to_action(mouse, action, scale=1, limit=480):
     # Get mouse movement since last step
     (x, y) = mouse.get_rel()
     # Set camera actions

@@ -4,7 +4,6 @@ ESSENTIAL_ARGS = (
     '-untrusted',
     '-novid',
     '-nojoy',
-    '-windowed', '-noborder',
+    '-windowed', '-noborder', '-vulkan',
     '+cl_use_opens_buy_menu', '0',
-    '+m_rawinput', '1'
 )
